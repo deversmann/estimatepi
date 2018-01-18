@@ -34,6 +34,7 @@ public class EstimatePiServlet extends HttpServlet {
 		
 		response.getWriter().append("<input type='submit' /><br />");
 		response.getWriter().append("Pi Estimate: " + (success?result:"") + "<br />");
+		response.getWriter().append("% Error: " + (success?Math.abs(Math.PI-result/Math.PI*100)+"%":"") + "<br />");
 		response.getWriter().append("Served at: ").append(System.getenv("HOSTNAME"));
 	}
 
