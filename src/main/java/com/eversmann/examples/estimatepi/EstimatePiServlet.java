@@ -1,5 +1,7 @@
 package com.eversmann.examples.estimatepi;
 
+import static com.eversmann.examples.estimatepi.EstimatePiUtils.*;
+
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -14,7 +16,6 @@ public class EstimatePiServlet extends HttpServlet {
 		
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	System.out.println("EstimatePiServlet.doGet");
 		int numTrials = 0;
 		int maxNumber = 0;
 		double result = 0.0;
@@ -36,6 +37,7 @@ public class EstimatePiServlet extends HttpServlet {
 		response.getWriter().append("Pi Estimate: " + (success?result:"") + "<br />");
 		response.getWriter().append("% Error: " + (success?Math.abs((Math.PI-result)/Math.PI)*100.0+"%":"") + "<br />");
 		response.getWriter().append("Served at: ").append(System.getenv("HOSTNAME"));
+		response.getWriter().append("</html>");
 	}
 
     @Override
@@ -53,11 +55,4 @@ public class EstimatePiServlet extends HttpServlet {
 		return Math.sqrt(6.0 * (double)numTries / (double)numFoundCoprimes);
 	}
 	
-	private static int gcd(int a, int b) {
-		return (b==0 ? a : gcd (b, a%b));
-	}
-	
-	private static int randomWithMax(int maxNumber) {
-		return (int)(Math.random()*maxNumber);
-	}
 }
